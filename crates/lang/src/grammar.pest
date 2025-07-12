@@ -1,0 +1,95 @@
+WHITESPACE = _{ " " | "\t" | "\n" | "\r" }
+COMMENT = _{ "//" ~ (!"\n" ~ ANY)* }
+
+file = { SOI ~ statement* ~ EOI }
+
+statement = {
+    instrument_def
+    | pattern_def
+    | song_section
+    | tempo_def
+    | command
+}
+
+// Instrument definitions
+instrument_def = {
+    ident ~ "=" ~ "{" ~ instrument_params ~ "}"
+}
+
+instrument_params = {
+    (instrument_param ~ ("," ~ instrument_param)* ~ ","?)?
+}
+
+instrument_param = {
+    "osc" ~ ":" ~ waveform
+    | "env" ~ ":" ~ envelope
+    | "filt" ~ ":" ~ filter
+    | "amp" ~ ":" ~ number
+}
+
+waveform = { "sin" | "square" | "saw" | "tri" | "noise" }
+
+envelope = {
+    "adsr" ~ "(" ~ number ~ "," ~ number ~ "," ~ number ~ "," ~ number ~ ")"
+}
+
+filter = {
+    "lpf" ~ "(" ~ number ~ ("," ~ "res" ~ ":" ~ number)? ~ ")"
+    | "hpf" ~ "(" ~ number ~ ("," ~ "res" ~ ":" ~ number)? ~ ")"
+}
+
+// Pattern definitions
+pattern_def = {
+    ident ~ "=" ~ "pattern" ~ "{" ~ pattern_tracks ~ "}" ~ ("@" ~ tempo_spec)?
+}
+
+pattern_tracks = {
+    (pattern_track ~ ("," ~ pattern_track)* ~ ","?)?
+}
+
+pattern_track = {
+    ident ~ ":" ~ string
+}
+
+// Melodic patterns
+melodic_pattern = {
+    "notes" ~ ":" ~ string
+}
+
+// Song sections
+song_section = {
+    "[" ~ ident ~ ":" ~ number ~ "bars" ~ "]" ~ section_content
+}
+
+section_content = {
+    (section_item)*
+}
+
+section_item = {
+    ident ~ ("only" | "*" ~ number)?
+}
+
+// Tempo
+tempo_def = {
+    "tempo" ~ ":" ~ number ~ "bpm"
+}
+
+tempo_spec = {
+    number ~ "bpm"
+    | ident
+}
+
+// Commands
+command = {
+    "#solo" ~ ident
+    | "#mute" ~ ident
+    | "#loop" ~ ident
+}
+
+// Basic types
+ident = @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC | "_")* }
+string = @{ "\"" ~ (!"\"" ~ ANY)* ~ "\"" }
+number = @{ 
+    "-"? ~ ASCII_DIGIT+ ~ ("." ~ ASCII_DIGIT+)?
+    | "-"? ~ ASCII_DIGIT+ ~ ("hz" | "Hz")
+}

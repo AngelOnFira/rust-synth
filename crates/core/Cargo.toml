@@ -1,0 +1,10 @@
+[package]
+name = "rsynth-core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+fundsp = { workspace = true }
+serde = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }

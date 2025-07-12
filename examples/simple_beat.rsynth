@@ -1,0 +1,12 @@
+// Simple 4/4 beat
+tempo: 120bpm
+
+// Basic drum pattern
+beat = pattern {
+    kick:  "x...x...x...x...",
+    snare: "....x.......x...",
+    hihat: "xxxxxxxxxxxxxxxx"
+} @ 120bpm
+
+[main: 16bars]
+    beat

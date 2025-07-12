@@ -1,0 +1,25 @@
+// Basic techno pattern demo
+tempo: 128bpm
+
+// Define our drum patterns
+drums = pattern {
+    kick:  "x...x...x...x...",
+    snare: "....x.......x...",
+    hihat: "..x...x...x...x."
+} @ 128bpm
+
+// Bass line pattern
+bassline = pattern {
+    bass: "C2 . . . E2 . . . G2 . . . F2 . . ."
+} @ 128bpm
+
+// Song structure
+[intro: 4bars]
+    drums
+
+[main: 8bars]
+    drums
+    bassline
+
+[outro: 4bars]
+    drums

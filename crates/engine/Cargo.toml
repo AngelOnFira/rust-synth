@@ -1,0 +1,13 @@
+[package]
+name = "rsynth-engine"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rsynth-core = { path = "../core" }
+fundsp = { workspace = true }
+cpal = { workspace = true }
+hound = { workspace = true }
+crossbeam = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }

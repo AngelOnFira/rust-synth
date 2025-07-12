@@ -1,0 +1,22 @@
+[package]
+name = "rsynth-cli"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "rsynth"
+path = "src/main.rs"
+
+[dependencies]
+rsynth-core = { path = "../core" }
+rsynth-lang = { path = "../lang" }
+rsynth-engine = { path = "../engine" }
+clap = { workspace = true }
+tokio = { workspace = true }
+notify = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+[dev-dependencies]
+hound = { workspace = true }
