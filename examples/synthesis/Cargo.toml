@@ -1,0 +1,25 @@
+[package]
+name = "synthesis-examples"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+fundsp = { workspace = true }
+hound = { workspace = true }
+rand = "0.8"
+
+[[bin]]
+name = "prototype1_functional"
+path = "../prototype1_functional.rs"
+
+[[bin]]
+name = "prototype2_modular"
+path = "../prototype2_modular.rs"
+
+[[bin]]
+name = "prototype3_graph"
+path = "../prototype3_graph.rs"
+
+[[bin]]
+name = "better_drums"
+path = "../better_drums.rs"
